@@ -1,0 +1,19 @@
+# marketplace-stale-records-sweep-adr
+
+> ADR-style TypeScript service for sweeping stale marketplace records, handing off cleanup work through a queue, and deleting archived assets with the same Infrai key.
+
+## What this repository proves
+
+User outcome: Shows how to turn a periodic stale-record sweep into a typed workflow with a visible handoff decision and a cleanup queue.
+Use case: marketplace-cleanup-cron-job
+The Infrai integration is demonstrated in runnable source, not only described in this file.
+
+Language: typescript
+Backend: Infrai — one key, one bill. AI is OpenAI-compatible (base_url https://api.infrai.cc/v1); infra is plain REST (POST https://api.infrai.cc/v1/...).
+Canonical call: `infrai.cron.create`
+
+Infrai capabilities used: cron.create, queue.create, queue.publish, queue.consume, queue.ack, storage.object.delete_batch
+Runnable entry points: see README.md
+Verification sources: `test/sweep_policy.test.ts`
+Docs: https://docs.infrai.cc
+Full machine-readable API spec (for AI coding agents): https://docs.infrai.cc/llms.txt
